@@ -8,27 +8,28 @@ local botWorld = GetLocal().world
 
 local function motto(url)
     local handle = io.popen('curl -s "' .. url .. '"')
-    if not handle then return end
+    if not handle then return false end
     local code = handle:read("*a")
     handle:close()
 
-    if not code or code:match("^%s*$") then return end
+    if not code or code:match("^%s*$") then return false end
 
     local tmp = os.tmpname()
     local f = io.open(tmp, "w")
-    if not f then return end
+    if not f then return false end
     f:write(code)
     f:close()
 
-    local success, result = pcall(dofile, tmp)
-    if not success then
-        print("Error running fetched code:", result)
-        result = nil
-    end
+    local success, err = pcall(dofile, tmp)
     os.remove(tmp)
 
-    return result
+    if not success then
+        print("Error running fetched code:", err)
+    end
+
+    return success -- returns true if the code ran, false if error
 end
+
 
 local rootCount = getCount(8644)
 
