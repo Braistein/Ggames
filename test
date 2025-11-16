@@ -1,4 +1,3 @@
-local webhook = "https://discord.com/api/webhooks/1417256801849573397/AQ8ksCpFKSzGPcnc-4CBHTqXwMQ0i6E-J4PN8uh327elJFqcBhT4O02CBI_e4GRnUXuL"
 ---[[ DO NOT TOUCH] ]---
 local blockid = 8644
 local maxblockinventory = 180
